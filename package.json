@@ -1,0 +1,39 @@
+{
+  "name": "bundle-minify",
+  "version": "0.1.0",
+  "description": "bundle-minify",
+  "keywords": [
+    "browserify",
+    "browserify-plugin",
+    "uglify",
+    "minify"
+  ],
+  "homepage": "https://github.com/zertosh/bundle-minify",
+  "licence": "MIT",
+  "author": "Andres Suarez <zertosh@gmail.com>",
+  "files": [
+    "README.md",
+    "bundle-minify.js"
+  ],
+  "main": "bundle-minify.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zertosh/bundle-minify.git"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "dependencies": {
+    "through2": "^0.6.3",
+    "uglify-js": "^2.4.15",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "browserify": "^7.0.0",
+    "es6-promise": "^2.0.0",
+    "tape": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}
