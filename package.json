@@ -21,15 +21,14 @@
     "url": "git://github.com/zertosh/bundle-minify.git"
   },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tap test/*.js"
   },
   "dependencies": {
     "uglify-js": "^2.4.15"
   },
   "devDependencies": {
-    "browserify": "^7.0.0",
-    "es6-promise": "^2.0.0",
-    "tape": "^3.0.0"
+    "browserify": "^11.0.1",
+    "tap": "^1.1.0"
   },
   "engines": {
     "node": ">=0.10"

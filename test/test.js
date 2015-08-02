@@ -1,36 +1,35 @@
-/* global -Promise */
-
-var Promise = require('es6-promise').Promise;
 var browserify = require('browserify');
-var test = require('tape');
+var test = require('tap').test;
 var uglify = require('uglify-js');
 
+var bundleMinify = require('../');
+
 test('bundle-minify', function(t) {
-  t.plan(1);
+  t.plan(5);
 
-  var bundleMinify = require('../');
+  var pending = 2;
+  var results = [];
+  function done() {
+    if (--pending !== 0) return;
+    t.equal(results[0], results[1], 'plugin and uglify output match');
+  }
 
-  var pWithPlugin = new Promise(function(resolve, reject) {
-    browserify('./test/fixtures/backbone')
-      .plugin(bundleMinify)
-      .bundle(function(err, buf) {
-        resolve(buf.toString());
-      });
-  });
+  browserify(__dirname + '/bundle/main')
+    .plugin(bundleMinify)
+    .bundle(function(err, buf) {
+      t.error(err, 'build failed');
+      t.ok(buf);
+      results.push(buf.toString());
+      done();
+    });
 
-  var pWithoutPlugin = new Promise(function(resolve, reject) {
-    browserify('./test/fixtures/backbone')
-      .bundle(function(err, buf) {
-        resolve(
-          uglify.minify(buf.toString(), {fromString: true}).code
-        );
-      });
-  });
+  browserify(__dirname + '/bundle/main')
+    .bundle(function(err, buf) {
+      t.error(err, 'build failed');
+      t.ok(buf);
+      var minified = uglify.minify(buf.toString(), {fromString: true});
+      results.push(minified.code);
+      done();
+    });
 
-  Promise.all([pWithPlugin, pWithoutPlugin]).then(function(values) {
-    var withPlugin = values[0];
-    var withoutPlugin = values[1];
-    t.equal(withPlugin, withoutPlugin, 'plugin and uglify output match');
-    t.end();
-  });
 });
