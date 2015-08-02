@@ -9,7 +9,7 @@
     "minify"
   ],
   "homepage": "https://github.com/zertosh/bundle-minify",
-  "licence": "MIT",
+  "license": "MIT",
   "author": "Andres Suarez <zertosh@gmail.com>",
   "files": [
     "README.md",
@@ -29,8 +29,5 @@
   "devDependencies": {
     "browserify": "^11.0.1",
     "tap": "^1.1.0"
-  },
-  "engines": {
-    "node": ">=0.10"
   }
 }
